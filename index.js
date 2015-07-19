@@ -13,46 +13,43 @@ var Delay = function() {
     this.pending = 0;
     this.lock = 0;
     process.nextTick(this.next());
-    this.delay = assign({}, {
-        next: this.next,
-        pass: this.pass
-    }, EventEmitter.prototype);
-    return this.delay;
 };
 util.inherits(Delay, EventEmitter);
 
 Delay.prototype._step = function(id) {
     var args = slice(arguments);
-    args.shift();
+    args.shift(); // Remove the callback ID.
+
     var err = args.shift();
+    if (err) {
+        this.fail++;
+        this.remaining = [];
+        return this.emit('error', err);
+    }
+
     this.args = this.args || {};
-    this.args[id] = args;
+    if (args.length) {
+        this.args[id] = args;
+    }
 
     if (this.fail || --this.pending || this.lock) {
         return;
     }
 
-    if (err) {
-        this.fail++;
-        this.remaining = [];
-        return this.delay.emit('error', err);
-    }
-
     this.lock = 1;
 
     var argsToSend = values(this.args);
-    argsToSend = argsToSend.filter(function(arg) { return arg.length; });
     if (argsToSend.length === 1) {
         argsToSend = argsToSend[0];
     }
-    this.args = {};
+    this.args = null;
 
     this.counter = 0;
     var cb;
     if (cb = this.remaining.shift()) {
         if (typeof cb !== 'function') {
             this.remaining = [];
-            return this.delay.emit(
+            return this.emit(
                 'error',
                 new Error('Each step in the Delay chain must be a callable.')
             );
@@ -63,17 +60,17 @@ Delay.prototype._step = function(id) {
             this.fail++;
             this.remaining = [];
             // TODO: Get proper stackTrace so that the user will know which step the problem was in.
-            return this.delay.emit('error', e);
+            return this.emit('error', e);
         };
     }
 
     if (!this.counter) {
         this.remaining = [];
-        return this.delay.emit('finish', argsToSend);
+        return this.emit('finish', argsToSend);
     }
 
-    // Useful when there is a mixture of async & sync callbacks i.e. pass & next.
     if (!this.pending) {
+        // For steps that only call pass(), we now break the lock and move on.
         process.nextTick(this.next());
     }
 

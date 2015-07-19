@@ -17,17 +17,17 @@ var Delay = require('node-delay');
 
 // Sequentialize multiple events
 var delay = new Delay(
-  // First step (simple timer)
-  function() {
-      setTimeout(this.next(), 2000);
-      console.log('Second step in 2 seconds.');
-  },
-  // Second step (concurrent timers)
-  function() {
-      setTimeout(this.next(), 4000);
-      setTimeout(this.next(), 3000);
-      console.log('Third step in 4 seconds.');
-  }
+    // First step (simple timer)
+    function() {
+        setTimeout(this.next(), 2000);
+        console.log('Second step in 2 seconds.');
+    },
+    // Second step (concurrent timers)
+    function() {
+        setTimeout(this.next(), 4000);
+        setTimeout(this.next(), 3000);
+        console.log('Third step in 4 seconds.');
+    }
 );
 
 delay.on('finish', function() {
@@ -40,7 +40,8 @@ delay.on('finish', function() {
 ```javascript
 var delay = new Delay(
     function() {
-        throw new Error('Intentional error');
+        this.next(new Error('Intentional error'));
+        // or simply new Error()
     },
     function() {
         console.log('Never actually reached.');
@@ -76,6 +77,8 @@ Emitted once all the steps have been completed. The set of arguments from the la
 Emitted either when there was a custom error sent by one of the asynchronous operations in a step or there was an exception thrown. Once the error event is emitted from one of the steps, the rest of the steps in the chain will not be executed.
 
 ## License
+
+Copyright (c) 2015 Amarnath Ravikumar
 
 Original code from the [Mojolicious](http://mojolicio.us/perldoc/Mojolicious) project - Copyright (C) 2008-2015, Sebastian Riedel.
 
