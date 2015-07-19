@@ -97,5 +97,3 @@ Delay.prototype.pass = function() {
 };
 
 module.exports = Delay;
-
-// Yet another tiny library for managing asynchronous control flow. Port of the Mojo::IOLoop::Delay library from Perl.

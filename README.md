@@ -1,6 +1,6 @@
 # node-delay
 
-Yet another tiny library for managing asynchronous control flow. Port of the [Mojo::IOLoop::Delay](http://mojolicio.us/perldoc/Mojo/IOLoop/Delay) Perl library.
+Yet another tiny library for managing async control flow. Port of the [Mojo::IOLoop::Delay](http://mojolicio.us/perldoc/Mojo/IOLoop/Delay) Perl library.
 
 ## Installation
 
@@ -17,15 +17,14 @@ var Delay = require('node-delay');
 
 // Sequentialize multiple events
 var delay = new Delay(
-
   // First step (simple timer)
-  function firstStep() {
+  function() {
       setTimeout(this.next(), 2000);
       console.log('Second step in 2 seconds.');
   },
 
   // Second step (concurrent timers)
-  function secondStep() {
+  function() {
       setTimeout(this.next(), 4000);
       setTimeout(this.next(), 3000);
       console.log('Third step in 4 seconds.');
@@ -41,15 +40,12 @@ delay.on('finish', function() {
 
 ```javascript
 var delay = new Delay(
-
     function() {
         throw new Error('Intentional error');
     },
-
     function() {
         console.log('Never actually reached.');
     }
-
 );
 
 delay.on('error', function(e) {
@@ -62,7 +58,7 @@ delay.on('error', function(e) {
 
 ### .next( ... )
 
-Returns a function that can be called once an asynchronous operation in a given step is complete. When the function is called, the arguments passed will be sent to the next step.
+Returns a function that can be called once a single asynchronous operation in a given step is complete. When the function is called, the arguments passed will be sent to the next step.
 
 ### .pass( ... )
 
