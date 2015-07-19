@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/amarnus/node-delay.git"
   },
+  "scripts": {
+    "test": "nodeunit test/delay.js"  
+  },
   "keywords": [
     "async",
     "control",
@@ -23,5 +26,9 @@
     "lodash.keys": "^3.1.2",
     "lodash.slice": "^3.0.0",
     "lodash.values": "^3.0.0"
+  },
+  "devDependencies": {
+    "lodash.flatten": "^3.0.2",
+    "nodeunit": "^0.9.1"
   }
 }
