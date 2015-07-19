@@ -1,0 +1,28 @@
+{
+  "name": "node-delay",
+  "version": "0.1.0",
+  "description": "Yet another tiny library for managing asynchronous control flow. Port of the Mojo::IOLoop::Delay Perl library.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/amarnus/node-delay.git"
+  },
+  "keywords": [
+    "async",
+    "control",
+    "flow"
+  ],
+  "author": "Amarnath Ravikumar <amarnus@gmail.com>",
+  "license": "Artistic-2.0",
+  "bugs": {
+    "url": "https://github.com/amarnus/node-delay/issues"
+  },
+  "homepage": "https://github.com/amarnus/node-delay",
+  "dependencies": {
+    "lodash.assign": "^3.2.0",
+    "lodash.filter": "^3.1.1",
+    "lodash.keys": "^3.1.2",
+    "lodash.slice": "^3.0.0",
+    "lodash.values": "^3.0.0"
+  }
+}
