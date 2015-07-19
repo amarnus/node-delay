@@ -1,4 +1,4 @@
-# node-delay
+# node-delay ![](https://api.travis-ci.org/amarnus/node-delay.svg)
 
 Yet another tiny library for managing async control flow. Port of the [Mojo::IOLoop::Delay](http://mojolicio.us/perldoc/Mojo/IOLoop/Delay) Perl library.
 
