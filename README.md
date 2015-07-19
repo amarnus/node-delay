@@ -58,7 +58,7 @@ delay.on('error', function(e) {
 
 ### .next( ... )
 
-Returns a function that can be called once a single asynchronous operation in a given step is complete. The arguments passed to he function will be sent to the next step.
+Returns a function that can be called once a single asynchronous operation in a given step is complete. The arguments passed to the function will be sent to the next step.
 
 ### .pass( ... )
 
