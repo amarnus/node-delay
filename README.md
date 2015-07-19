@@ -22,7 +22,6 @@ var delay = new Delay(
       setTimeout(this.next(), 2000);
       console.log('Second step in 2 seconds.');
   },
-
   // Second step (concurrent timers)
   function() {
       setTimeout(this.next(), 4000);
