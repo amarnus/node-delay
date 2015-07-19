@@ -58,11 +58,11 @@ delay.on('error', function(e) {
 
 ### .next( ... )
 
-Returns a function that can be called once a single asynchronous operation in a given step is complete. When the function is called, the arguments passed will be sent to the next step.
+Returns a function that can be called once a single asynchronous operation in a given step is complete. The arguments passed to he function will be sent to the next step.
 
 ### .pass( ... )
 
-Sends data synchronously to the next step.
+Sends data to the next step.
 
 ## Events
 
@@ -75,6 +75,8 @@ Emitted once all the steps have been completed. The set of arguments from the la
 ### error
 
 Emitted either when there was a custom error sent by one of the asynchronous operations in a step or there was an exception thrown. Once the error event is emitted from one of the steps, the rest of the steps in the chain will not be executed.
+
+---
 
 ## License
 
