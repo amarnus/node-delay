@@ -1,6 +1,6 @@
 {
   "name": "node-delay",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Yet another tiny library for managing asynchronous control flow. Port of the Mojo::IOLoop::Delay Perl library.",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git://github.com/amarnus/node-delay.git"
   },
   "scripts": {
-    "test": "nodeunit test/delay.js"  
+    "test": "nodeunit test/delay.js"
   },
   "keywords": [
     "async",
