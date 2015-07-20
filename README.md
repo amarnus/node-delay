@@ -56,6 +56,8 @@ delay.on('error', function(e) {
 
 ## API
 
+>Note that the first argument passed to the next step is assumed to be the error object as is typical in the `node` world.
+
 ### .next( ... )
 
 Returns a function that can be called once a single asynchronous operation in a given step is complete. The arguments passed to the function will be sent to the next step.
@@ -70,13 +72,13 @@ The `Delay` function inherits from the `EventEmitter` and emits the following cu
 
 ### finish
 
-Emitted once all the steps have been completed. The set of arguments from the last step is sent as the payload.
+Emitted once a step that has neither a call to `next()` or `pass()` is reached in the chain. While this is often the last step - it may not always be the case.
+
+The set of arguments sent from the last executed step in the chain is passed as the event payload.
 
 ### error
 
-Emitted either when there was a custom error sent by one of the asynchronous operations in a step or there was an exception thrown. Once the error event is emitted from one of the steps, the rest of the steps in the chain will not be executed.
-
----
+Emitted either when there was a custom error sent by one of the asynchronous operations in a step or there was an synchronous exception thrown. Once the error event is emitted from one of the steps, the rest of the steps in the chain will not be executed.
 
 ## License
 
